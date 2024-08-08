@@ -3,6 +3,7 @@ from typing import Dict, List, Sequence
 
 from pydantic import BaseModel
 from strictyaml import YAML, load
+from typing import Optional
 
 import regression_model
 
@@ -69,13 +70,25 @@ def find_config_file() -> Path:
     raise Exception(f"Config not found at {CONFIG_FILE_PATH!r}")
 
 
-def fetch_config_from_yaml(cfg_path: Path = None) -> YAML:
+# def fetch_config_from_yaml(cfg_path: Path = None) -> YAML:
+#     """Parse YAML containing the package configuration."""
+
+#     if not cfg_path:
+#         cfg_path = find_config_file()
+
+#     if cfg_path:
+#         with open(cfg_path, "r") as conf_file:
+#             parsed_config = load(conf_file.read())
+#             return parsed_config
+#     raise OSError(f"Did not find config file at path: {cfg_path}")
+
+def fetch_config_from_yaml(cfg_path: Optional[Path] = None) -> YAML:
     """Parse YAML containing the package configuration."""
 
-    if not cfg_path:
+    if cfg_path is None:
         cfg_path = find_config_file()
 
-    if cfg_path:
+    if cfg_path and cfg_path.exists():
         with open(cfg_path, "r") as conf_file:
             parsed_config = load(conf_file.read())
             return parsed_config

@@ -1,6 +1,9 @@
 from regression_model.config.core import config
 from regression_model.processing.features import TemporalVariableTransformer
 
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
 
 def test_temporal_variable_transformer(sample_input_data):
     # Given

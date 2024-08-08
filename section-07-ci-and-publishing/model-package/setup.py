@@ -7,10 +7,10 @@ from setuptools import find_packages, setup
 
 # Package meta-data.
 NAME = 'tid-regression-model'
-DESCRIPTION = "Example regression model package from Train In Data."
-URL = "https://github.com/trainindata/testing-and-monitoring-ml-deployments"
-EMAIL = "christopher.samiullah@protonmail.com"
-AUTHOR = "ChristopherGS"
+DESCRIPTION = "Example regression model package."
+URL = "https://github.com/morpheus-101/deploying-machine-learning-models"
+EMAIL = "rishikeshdhayarkar1091@gmail.com"
+AUTHOR = "Rishikesh Dhayarkar"
 REQUIRES_PYTHON = ">=3.7.0"
 
 

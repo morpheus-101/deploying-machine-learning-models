@@ -92,7 +92,7 @@ jobs:
       - run:
           name: Build and run Dockerfile (see https://docs.railway.app/deploy/dockerfiles)
           command: |
-            cd section-08-deploying-with-containers && railway up --detach
+            cd section-08-deploying-with-containers && railway up --detach -s enchanting-cooperation -e production
 
   test_regression_model_py37:
     docker:
@@ -264,21 +264,46 @@ tags_only: &tags_only
       only: /^.*/
 
 
+# workflows:
+#   version: 2
+#   deploy_pipeline:
+#     jobs:
+#       # - section_07_test_app
+#       - section_07_test_and_upload_regression_model
+#       - section_07_deploy_app_to_railway:
+#           requires:
+#             - section_07_test_and_upload_regression_model
+#             # - section_07_test_app
+#           filters:
+#             branches:
+#               only:
+#                 - master
+#                 - demo
+
+
 workflows:
   version: 2
   deploy_pipeline:
     jobs:
       # - section_07_test_app
-      - section_07_test_and_upload_regression_model
-      - section_07_deploy_app_to_railway:
-          requires:
-            - section_07_test_and_upload_regression_model
-            # - section_07_test_app
-          filters:
-            branches:
-              only:
-                - master
-                - demo
+      # - section_07_deploy_app_to_railway:
+      #     requires:
+      #       - section_07_test_app
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
+      #           - demo
+      # # upload after git tags are created
+      # - section_07_test_and_upload_regression_model:
+      #     <<: *tags_only
+
+      - section_08_deploy_app_container_via_railway
+        #  filters:
+        #    branches:
+        #      only:
+        #        - master
+        #        - demo
 
 
 
